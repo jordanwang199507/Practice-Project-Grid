@@ -4,7 +4,16 @@
   "description": "project using node sass to practice CSS:GRID ",
   "main": "index.js",
   "scripts": {
-    "before-commit": "rm -rf node_modules"
+    "before-commit": "rm -rf node_modules",
+    "watch:sass": "sass sass/main.scss css/style.css -w",
+    "devserver-chrome:sass": "live-server",
+    "devserver-firefox:sass": "live-server --browser=firebox",
+    "start": "npm-run-all --parallel devserver-chrome:sass watch:sass",
+
+    "compile:sass": " sass sass/main.scss css/style.comp.css",
+    "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' css/style.comp.css -o css/style.prefix.css",
+    "comppress:css": "sass css/style.prefix.css css/style.css --output-style compressed",
+    "build:css": "npm-run-all compile:sass prefix:css compress:css"
   },
   "author": "Jordan Wang",
   "license": "ISC",
